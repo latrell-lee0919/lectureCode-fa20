@@ -13,29 +13,37 @@ public class SLList {
         }
 
     }
-    private IntNode first;
+    /** The first item (if it exists) is at sentinel.next */
+    private IntNode sentinel;
     private int size;
 
+    /** Creates an empty SLList */
+    public SLList() {
+        sentinel = new IntNode(0, null);
+        size = 0;
+    }
+
     public SLList(int x) {
-        first = new IntNode(x, null);
+        sentinel = new IntNode(0, null);
+        sentinel.next = new IntNode(x, null);
         size = 1;
     }
 
     public void addFirst(int x) {
         // goal is to add a node at the beginning of the list
-        first = new IntNode(x, first);
+        sentinel.next = new IntNode(x, sentinel.next);
         size += 1;
     }
 
     public int getFirst() {
         // goal is to return the first node in the list
-        return first.item;
+        return sentinel.next.item;
     }
 
     public void addLast(int x) {
         // loop through the list (recursively or iteratively) until first.next is null
 
-        IntNode curr = first;
+        IntNode curr = sentinel;
 
         // move the pointer to the end, good job Latrell!
         while(curr.next != null) {
@@ -62,10 +70,10 @@ public class SLList {
 
     public static void main(String[] args) {
         /* Creates a list of one integer, namely 10 */
-        SLList l = new SLList(15);
+        SLList l = new SLList();
         l.addFirst(10);
         l.addFirst(5);
-        //System.out.println(l.getFirst());
-        l.addLast(7);
+        l.addLast(20);
+        System.out.println(l.size());
     }
 }
