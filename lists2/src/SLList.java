@@ -54,6 +54,21 @@ public class SLList {
         size += 1;
     }
 
+    /** Delete first element in SLList */
+    public void deleteFirst() {
+        // remove value right after the sentinel node (sentinel.next)
+        //sentinel.next = null; // bad, this removes everything
+
+        // this is pretty much reassigning the sentinel pointer to point to
+        // the next node of the original first pointer
+        // remember when you reassign reference types, they end up going away
+        // to the garbage collector
+        sentinel.next = sentinel.next.next;
+
+        // decrement the size by one
+        size -= 1;
+    }
+
 //    /** Returns the size of the list that starts at IntNode p */
 //    private static int size(IntNode p) {
 //        if (p.next == null) {
@@ -74,6 +89,6 @@ public class SLList {
         l.addFirst(10);
         l.addFirst(5);
         l.addLast(20);
-        System.out.println(l.size());
+        l.deleteFirst();
     }
 }
