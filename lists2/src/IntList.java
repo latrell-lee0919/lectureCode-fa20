@@ -34,11 +34,33 @@ public class IntList {
         return rest.get(i - 1);
     }
 
-    public static void main(String[] args) {
-        IntList L = new IntList(15, null);
-        L = new IntList(10, L);
-        L = new IntList(5, L);
+    /** If 2 numbers in a row are the same, add them together */
+    public void addAdjacent() {
+        // need to traverse the list
+        IntList curr = this;
 
-        System.out.println(L.get(100));
+        while (curr.rest != null) {
+            // need to compare first value with the next value
+            if (curr.first == curr.rest.first) {
+                // if values are same, reassign them so that the sum is 1st value
+                curr.first = curr.first + curr.rest.first;
+
+                // make it so that only the sum is retained
+                curr.rest = curr.rest.rest;
+            } else {
+                break;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        IntList L = new IntList(3, null);
+        L = new IntList(2, L);
+        L = new IntList(1, L);
+        L = new IntList(1, L);
+
+        L.addAdjacent();
+
+        System.out.println(L.size());
     }
 }
