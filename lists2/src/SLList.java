@@ -29,6 +29,30 @@ public class SLList {
         size = 1;
     }
 
+    public SLList(int[] x) {
+        sentinel = new IntNode(0, null);
+        sentinel.next = new IntNode(x[0], null);
+        size = 1;
+        // iterate through the rest of the array
+        for (int i = 1; i < x.length; i += 1) {
+            // create pointer that starts at the beginning
+            IntNode curr = sentinel;
+
+            // make sure the next value is not null
+            while (curr.next != null) {
+                // update pointer to point to next value
+                curr = curr.next;
+            }
+
+            // retain value at index in array by placing it in the next spot
+            curr.next = new IntNode(x[i], null);
+
+            // increment size by 1
+            size += 1;
+        }
+
+    }
+
     public void addFirst(int x) {
         // goal is to add a node at the beginning of the list
         sentinel.next = new IntNode(x, sentinel.next);
@@ -85,10 +109,7 @@ public class SLList {
 
     public static void main(String[] args) {
         /* Creates a list of one integer, namely 10 */
-        SLList l = new SLList();
-        l.addFirst(10);
-        l.addFirst(5);
-        l.addLast(20);
-        l.deleteFirst();
+        SLList l2 = new SLList(new int[]{1, 2, 3, 4});
+        System.out.println(l2.size());
     }
 }
