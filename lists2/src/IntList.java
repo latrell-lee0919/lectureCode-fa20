@@ -53,14 +53,38 @@ public class IntList {
         }
     }
 
+    /** Every time you add a value, you "square" the IntList */
+    public void squareValue(int x) {
+        // need to traverse the list
+        IntList curr = this;
+
+        while (curr != null) {
+            // add the squared value of the current node right after it
+            curr.rest = new IntList((curr.first * curr.first), curr.rest);
+
+            if (curr.rest.rest == null) {
+                curr.rest.rest = new IntList(x, null);
+                break;
+            }
+
+            // move the pointer
+            curr = curr.rest.rest;
+        }
+    }
+
     public static void main(String[] args) {
-        IntList L = new IntList(3, null);
-        L = new IntList(2, L);
-        L = new IntList(1, L);
+//        IntList L = new IntList(3, null);
+//        L = new IntList(2, L);
+//        L = new IntList(1, L);
+//        L = new IntList(1, L);
+//
+//        L.addAdjacent();
+        IntList L = new IntList(2, null);
         L = new IntList(1, L);
 
-        L.addAdjacent();
+        L.squareValue(5);
+        L.squareValue(7);
 
-        System.out.println(L.size());
+//        System.out.println(L.size());
     }
 }
